@@ -1,24 +1,42 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Navbar from './components/Navbar';
+import Textform from './components/Textform';
 
 function App() {
+  const [mode, setMode] = useState("light");
+  const [light, settextlight] = useState("text-dark");
+  const [btnText, setbtntext] = useState("dark");
+  const [color, setcolor] = useState("light");
+
+
+  const darkMode = () => {
+    if (mode === "light") {
+      setMode("dark")
+      settextlight("text-light")
+      setbtntext("light")
+      document.body.style.backgroundColor = "#3e4451";
+      setcolor("white");
+
+
+    }
+    else {
+      setMode("light");
+      settextlight("text-dark");
+      setbtntext("dark")
+      document.body.style.backgroundColor = "white";
+      setcolor("black")
+
+
+    }
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar title="Textutils" home="Home" About="About" feature="Features" mode={mode} darkMode={darkMode} textlight={light} btn={btnText} />
+      <div className="container  my-3"  >
+        <Textform heading="Enter your text here" color={color} />
+      </div>
+    </>
   );
 }
 
